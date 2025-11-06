@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Arb Streamer Pro v18 — GitHub Pages + Cloudflare</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="toolbar">
+    <h1 style="margin-right:auto">Arb Streamer Pro v18</h1>
+    <span id="status" class="pill statusline">✅ Idle</span>
+    <label class="pill">Refresh (sec) <input id="refreshSec" type="number" min="5" value="5" style="width:80px;margin-left:8px"></label>
+    <label class="pill">Min title similarity <input id="minScore" type="number" min="50" max="100" value="80" style="width:80px;margin-left:8px"></label>
+    <button id="startBtn" class="primary">Start</button>
+    <button id="stopBtn">Stop</button>
+  </div>
+
+  <div class="grid">
+    <!-- LEFT: Arbitrage (ANY edge > 0) -->
+    <div class="card">
+      <h2 class="h2-arb">🟢 Live Arbitrage (any edge)</h2>
+      <table>
+        <thead>
+          <tr><th>Time</th><th>Event</th><th>Kalshi YES</th><th>Polymarket YES</th><th>Edge (bps)</th></tr>
+        </thead>
+        <tbody id="arbRows"></tbody>
+      </table>
+    </div>
+
+    <!-- RIGHT: Close Arbitrage (<5%) + Raw Markets with tabs -->
+    <div class="stack">
+      <div class="card">
+        <h2 class="h2-close">🟠 Close Arbitrage (&lt;5%)</h2>
+        <table>
+          <thead>
+            <tr><th>Time</th><th>Event</th><th>Kalshi YES</th><th>Polymarket YES</th><th>Edge (bps)</th></tr>
+          </thead>
+          <tbody id="closeRows"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h2 class="h2-raw">📘 Raw Markets</h2>
+        <div class="small" style="margin-bottom:6px">Kalshi: <span id="kalCount">0</span> | Polymarket: <span id="polyCount">0</span></div>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="kalTab">Kalshi</button>
+          <button class="tab-btn" data-tab="polyTab">Polymarket</button>
+        </div>
+        <div id="kalTab" class="tab-panel active">
+          <div id="kalList" class="scrollbox"></div>
+        </div>
+        <div id="polyTab" class="tab-panel">
+          <div id="polyList" class="scrollbox"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="errors" class="small" style="margin-top:10px"></div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
